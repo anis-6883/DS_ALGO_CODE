@@ -1,0 +1,31 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void subSequence(int arr[], int n, int i, vector<int> &ds){
+
+    // base case (Time Complexity: O(2^N))
+    if(i == n){
+        if(!ds.empty()){
+            for(auto x: ds) cout << x << " ";
+            cout << endl;
+        }
+        return;
+    }
+
+    ds.push_back(arr[i]);
+    // pick
+    subSequence(arr, n, i+1, ds);
+    ds.pop_back();
+    // non-pick
+    subSequence(arr, n, i+1, ds);
+}
+
+int main()
+{
+    int arr[] = {4, 2, 3};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    vector<int> ds;
+    subSequence(arr, n, 0, ds);
+    return 0;
+}

@@ -1,0 +1,68 @@
+#include <iostream>
+#include <vector>
+#include <stack>
+using namespace std;
+
+void addEdge(vector<int> [], int, int);
+void findTopoSort(vector<int>[], int, vector<int>&, stack<int>&);
+vector<int> topoSort(vector<int>[], int);
+
+int main()
+{
+    int n;
+    cout<<"How Many Nodes: ";
+    cin>>n;
+    vector<int> adj[n];
+    int edge;
+    cout<<"How many Edges: ";
+    cin>>edge;
+    for(int i=0; i<edge; i++)
+    {
+        cout<<"Input the nodes that are connected: ";
+        int a,b;
+        cin>>a>>b;
+        addEdge(adj,a,b);
+    }
+
+    vector<int> result = topoSort(adj, n);
+
+    for(int x: result) cout << x << " ";
+    cout << endl;
+    
+    return 0;
+}
+
+void addEdge(vector<int> adj[], int a, int b)
+{
+    adj[a].push_back(b);
+    // adj[b].push_back(a);
+}
+
+vector<int> topoSort(vector<int> adj[], int n){
+    vector<int> vis(n, 0);
+    stack <int> stk;
+
+    for(int i=0; i<n; i++){
+        if(!vis[i]){
+            findTopoSort(adj, i, vis, stk);
+        }
+    }
+    
+    vector<int> topoSort;
+    while(!stk.empty()){
+        topoSort.push_back(stk.top());
+        stk.pop();
+    }
+    return topoSort;
+}
+
+void findTopoSort(vector<int> adj[], int src, vector<int>&vis, stack<int>&stk){
+    vis[src] = 1;
+
+    for(auto x: adj[src]){
+        if(!vis[x]){
+            findTopoSort(adj, x, vis, stk);
+        }
+    }
+    stk.push(src);
+}

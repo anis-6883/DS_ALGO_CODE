@@ -1,0 +1,78 @@
+#include <iostream>
+#include <queue>
+#include <map>
+#include <utility>
+using namespace std;
+
+struct Node
+{
+    Node* left;
+    int data;
+    Node* right;
+
+    Node(int value){
+        data = value;
+        left = NULL;
+        right = NULL;
+    }
+};
+void topView(Node*);
+
+int main()
+{
+    // tree 1
+    Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+    root->left->right->left = new Node(6);
+    root->right->left = new Node(7);
+    root->right->right = new Node(8);
+    root->right->right->left = new Node(9);
+    root->right->right->right = new Node(10);
+
+    // tree 2
+    // Node* root = new Node(1);
+    // root->left = new Node(2);
+    // root->left->left = new Node(3);
+    // root->left->left->left = new Node(9);
+    // root->right = new Node(4);
+    // root->right->left = new Node(5);
+    // root->right->right = new Node(6);
+    // root->right->right->right = new Node(7);
+    // root->right->right->right->right = new Node(8);
+
+    topView(root);
+    cout << endl;
+    return 0;
+}
+
+void topView(Node* root){
+
+    if(!root) return;
+
+    queue<pair<Node*, int>> q;
+    map <int, int> m;
+    //vector<int> result;
+
+    q.push({root, 0});
+
+    while(!q.empty()){
+        auto temp = q.front();
+        q.pop();
+        Node* n = temp.first;
+        int line = temp.second;
+
+        if(m.find(line) == m.end()) m[line] = n->data;
+
+        if(n->left) q.push({n->left, line-1});
+        if(n->right) q.push({n->right, line+1});
+
+    }
+
+    for(auto it: m){
+        // result.push_back(it.second);
+        cout << it.second << " ";
+    }
+}

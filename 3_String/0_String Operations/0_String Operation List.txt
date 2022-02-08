@@ -1,0 +1,12 @@
+String Operations:
+
+1) Finding Length of String
+2) Convert Uppercase and Lowercase of String
+3) Appending a String into another String
+4) Comparing Two Strings
+5) Reverse a String
+6) Extracting a Sub-String from a String using Position
+7) Insert a String in the main String using Position
+8) Pattern Matching (Naive, KMP)
+9) Delete a String in the main String using Position
+10) Replace a Pattern with another pattern in a String

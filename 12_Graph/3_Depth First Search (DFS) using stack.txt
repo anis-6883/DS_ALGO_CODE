@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void addEdge(vector<int> [], int, int);
+void dfsTraverse(vector<int> [], int, int);
+
+int main()
+{
+    int n;
+    cout<<"How Many Nodes: ";
+    cin>>n;
+    vector<int> adj[n];
+    int edge;
+    cout<<"How many Edges: ";
+    cin>>edge;
+    for(int i=0; i<edge; i++)
+    {
+        cout<<"Input the nodes that are connected: ";
+        int a,b;
+        cin>>a>>b;
+        addEdge(adj,a,b);
+    }
+
+    int src;
+    cout<<"Enter the source node: ";
+    cin>>src;
+
+    dfsTraverse(adj,n,src);
+
+    return 0;
+}
+
+void addEdge(vector<int> adj[], int a, int b)
+{
+    adj[a].push_back(b);
+    adj[b].push_back(a);
+}
+
+void dfsTraverse(vector<int> adj[], int n, int src)
+{
+    int visited[n]={0};
+    stack<int> stk;
+    stk.push(src);
+
+    while(!stk.empty())
+    {
+        int top = stk.top();
+        stk.pop();
+
+        if(!visited[top])
+        {
+            cout<<top<<" ";
+            visited[top]=1;
+        }
+
+        for(auto x: adj[top])
+        {
+            if(!visited[x])
+                stk.push(x);
+        }
+    }
+}

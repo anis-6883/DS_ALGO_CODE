@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+void call_by_reference(int *x, int *y)
+{
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+int main()
+{
+    int x=5, y=10;
+    int *ptr = &x;
+
+    cout << "x = " << x << " " << "y = " << y << endl;
+    call_by_reference(&x, &y);
+    cout << "x = " << x << " " << "y = " << y << endl;
+
+    cout<<endl;
+
+    cout << "x = " << x << endl;
+    cout << "*ptr = " << *ptr << endl;
+    cout << "Address of x = " << &x << endl;
+    cout << "Address of ptr = " << &ptr << endl;
+    return 0;
+}

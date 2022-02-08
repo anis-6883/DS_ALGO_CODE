@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Item{
+    int profit;
+    int weight;
+};
+
+double fractionalKnapsack(Item [], int, int);
+
+int main(){
+    
+    int n, sackWeight;
+    cout << "Enter Item Number: ";
+    cin >> n;
+    cout << "Enter Sack weight: ";
+    cin >> sackWeight;
+
+    Item arr[n];
+
+    for(int i=0; i<n; i++){
+        int p,w;
+        cout << "Enter Profit and Weight: ";
+        cin >> p >> w;
+        arr[i].profit = p;
+        arr[i].weight = w;
+    }
+
+    double result = fractionalKnapsack(arr, n, sackWeight);
+    cout << result << endl;
+
+	return 0;
+}
+
+bool comp(Item a, Item b){
+    double x = (double)a.profit / (double)a.weight;
+    double y = (double)b.profit / (double)b.weight;
+    return x > y;
+}
+
+double fractionalKnapsack(Item arr[], int n, int sackWeight)
+{
+    sort(arr, arr+n, comp);
+    
+    int curWeight = 0;
+    double finalValue = 0.0;
+    
+    for(int i=0; i<n; i++){
+        
+        if(curWeight + arr[i].weight <= sackWeight){
+            curWeight += arr[i].weight;
+            finalValue += arr[i].profit;
+        }else{
+            int remain = sackWeight - curWeight;
+            finalValue += (arr[i].profit / (double)arr[i].weight) * (double)remain;
+            break;
+        }
+    }
+    
+    return finalValue;
+}

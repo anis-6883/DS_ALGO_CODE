@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+int* left_rotate(int [], int, int);
+int main()
+{
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0; i<n; i++)
+        cin>>arr[i];
+    int d;
+    cin>>d;
+    left_rotate(arr,d,n);
+    for(int i=0; i<n; i++)
+        cout<<arr[i]<<" ";
+    return 0;
+}
+int* left_rotate(int arr[], int d, int n)
+{
+    for(int i=0; i<d; i++)
+    {
+        int temp = arr[0],j;
+        for(j=0; j<n-1; j++)
+        {
+            arr[j] = arr[j+1];
+        }
+        arr[j] = temp;
+    }
+    return arr;
+}

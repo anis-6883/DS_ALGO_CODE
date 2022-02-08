@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+void printAsc(int n)
+{
+    if(n <= 0) return;
+
+    printAsc(n-1);
+    cout << n << endl;
+}
+
+void printDesc(int n)
+{
+    if(n <= 0) return;
+
+    cout << n << endl;
+    printDesc(n-1);
+}
+
+int main()
+{
+    int n=5;
+    printDesc(n);
+    cout << endl;
+    printAsc(n);
+    return 0;
+}

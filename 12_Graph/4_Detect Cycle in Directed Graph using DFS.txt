@@ -1,0 +1,63 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void addEdge(vector<int> [], int, int);
+bool checkForCycle(vector<int>[], int, vector<int>&, vector<int>&);
+bool isCyclic(vector<int>[], int);
+
+int main()
+{
+    int n;
+    cout<<"How Many Nodes: ";
+    cin>>n;
+    vector<int> adj[n];
+    int edge;
+    cout<<"How many Edges: ";
+    cin>>edge;
+    for(int i=0; i<edge; i++)
+    {
+        cout<<"Input the nodes that are connected: ";
+        int a,b;
+        cin>>a>>b;
+        addEdge(adj,a,b);
+    }
+
+    isCyclic(adj, n) ? 
+        cout << "Cycle is Present" << endl :
+        cout << "Cycle is not Present" << endl;
+    return 0;
+}
+
+void addEdge(vector<int> adj[], int a, int b)
+{
+    adj[a].push_back(b);
+    // adj[b].push_back(a);
+}
+
+bool isCyclic(vector<int> adj[], int n){
+    vector<int> vis(n, 0);
+    vector<int> dfsVis(n, 0);
+
+    for(int i=0; i<n; i++){
+        if(!vis[i]){
+            if(checkForCycle(adj, i, vis, dfsVis)) return true;
+        }
+    }
+    return false;
+}
+
+bool checkForCycle(vector<int> adj[], int src, vector<int>&vis, vector<int>&dfsVis){
+    vis[src] = 1;
+    dfsVis[src] = 1;
+
+    for(auto x: adj[src]){
+        if(!vis[x]){
+            if(checkForCycle(adj, x, vis, dfsVis)) return true;
+        }
+        else if(dfsVis[x]) return true;
+    }
+
+    dfsVis[src] = 0;
+    return false;
+}

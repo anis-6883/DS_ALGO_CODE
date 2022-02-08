@@ -1,0 +1,41 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void heapify(vector<int>&, int, int);
+void heapSort(vector<int>&, int);
+
+int main(){
+    vector<int> arr = {70, 50, 40, 45, 35, 39, 16, 10, 9};
+    heapSort(arr, arr.size());
+
+    for(auto x: arr) cout << x << " "; 
+    cout << endl;
+    return 0;
+}
+
+void heapSort(vector<int> &arr, int n){
+
+    for(int i=(n/2)-1; i>=0; i--){
+        heapify(arr, n, i);
+    }
+
+    for(int i=n-1; i>0; i--){
+        swap(arr[0], arr[i]);
+        heapify(arr, i, 0);
+    }
+}
+
+void heapify(vector<int> &arr, int n, int i){
+    int largest = i;
+    int l = (i*2) + 1;
+    int r = (i*2) + 2;
+
+    if(l < n && arr[l] > arr[largest]) largest = l;
+    if(r < n && arr[r] > arr[largest]) largest = r;
+
+    if(largest != i){
+        swap(arr[i], arr[largest]);
+        heapify(arr, n, largest);
+    }
+}

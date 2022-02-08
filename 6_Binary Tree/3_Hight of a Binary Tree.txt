@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+struct node
+{
+    struct node* left;
+    int data;
+    struct node* right;
+};
+struct node* createTree();
+int calculateHight(struct node*);
+
+int main()
+{
+    struct node* root = NULL;
+    root = createTree();
+    cout << calculateHight(root) << endl;
+    return 0;
+}
+
+struct node* createTree()
+{
+    struct node* new_node;
+    new_node = (struct node*)malloc(sizeof(struct node));
+    int x;
+    cout << "Enter the Value(If not -1): ";
+    cin >> x;
+    if(x == -1) return 0;
+    new_node->data = x;
+    cout<<"Enter Left Child of " << x << ": ";
+    new_node->left = createTree();
+    cout<<"Enter Right Child of " << x << ": ";
+    new_node->right = createTree();
+
+    return new_node;
+};
+
+int calculateHight(struct node* root)
+{
+    if(root == NULL) return 0;
+    int leftHight = calculateHight(root->left);
+    int rightHight = calculateHight(root->right);
+    return 1 + max(leftHight, rightHight);
+}

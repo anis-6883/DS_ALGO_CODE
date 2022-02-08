@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    string str1, str2, str3;
+    getline(cin, str1);
+    getline(cin, str2);
+
+    str3 = str1 + str1;
+
+    if(str1.size() == str2.size())
+    {
+        if(str3.find(str2) != string::npos)
+            cout<<"Yes"<<endl;
+        else
+            cout<<"No"<<endl;
+    }
+    else
+        cout<<"No"<<endl;
+
+
+    return 0;
+}

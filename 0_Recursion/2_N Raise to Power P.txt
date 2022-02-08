@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+
+int power(int n, int p)
+{
+    if(p == 1) return n; // base case
+    return n * power(n, p-1);
+}
+
+int main()
+{
+    int n, p;
+    cout << "Enter N and P: ";
+    cin >> n >> p;
+    cout << n << " raised to power "<< p << " = " << power(n , p) << endl;
+    return 0;
+}

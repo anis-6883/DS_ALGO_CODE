@@ -1,0 +1,87 @@
+#include <iostream>
+using namespace std;
+
+struct node
+{
+    int data;
+    struct node* left;
+    struct node* right;
+};
+struct node* root = NULL;
+struct node* CreateTree();
+void PreOrderTraverse(struct node*);     // Root -> Left -> Right
+void InOrderTraverse(struct node*);      // Left -> Root -> Right
+void PostOrderTraverse(struct node*);    // Left -> Right -> Root
+
+int main()
+{
+    root = CreateTree();
+    int choice;
+    int i=1;
+    while(i)
+    {
+        cout<<"1. Pre-Order Traverse\n2. In-Order Traverse\n3. Post-OrderTraverse\nEnter Your Choice: ";
+        cin>>choice;
+        switch(choice)
+        {
+        case 1:
+            PreOrderTraverse(root);
+            break;
+        case 2:
+            InOrderTraverse(root);
+            break;
+        case 3:
+            PostOrderTraverse(root);
+            break;
+        }
+        cout<<"Continue(If No Press 0): ";
+        cin>>i;
+    }
+    return 0;
+}
+
+struct node* CreateTree()
+{
+    struct node* new_node;
+    new_node = (struct node*)malloc(sizeof(struct node));
+    int x;
+    cout<<"Enter the Value(If not -1): ";
+    cin>>x;
+    if(x==-1)
+    {
+        return 0;
+    }
+    new_node->data = x;
+    cout<<"Enter Left Child of "<<x<<". ";
+    new_node->left = CreateTree();
+    cout<<"Enter Right Child of "<<x<<". ";
+    new_node->right = CreateTree();
+    return new_node;
+};
+
+void PreOrderTraverse(struct node* root)
+{
+    if(root==0)
+        return;
+    cout<<root->data<<endl;
+    PreOrderTraverse(root->left);
+    PreOrderTraverse(root->right);
+}
+
+void InOrderTraverse(struct node* root)
+{
+    if(root==0)
+        return;
+    InOrderTraverse(root->left);
+    cout<<root->data<<endl;
+    InOrderTraverse(root->right);
+}
+
+void PostOrderTraverse(struct node* root)
+{
+    if(root==0)
+        return;
+    PostOrderTraverse(root->left);
+    PostOrderTraverse(root->right);
+    cout<<root->data<<endl;
+}

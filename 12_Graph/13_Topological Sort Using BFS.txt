@@ -1,0 +1,70 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+void addEdge(vector<int> [], int, int);
+vector<int> topoSort(vector<int>[], int);
+
+int main()
+{
+    int n;
+    cout<<"How Many Nodes: ";
+    cin>>n;
+    vector<int> adj[n];
+    int edge;
+    cout<<"How many Edges: ";
+    cin>>edge;
+    for(int i=0; i<edge; i++)
+    {
+        cout<<"Input the nodes that are connected: ";
+        int a,b;
+        cin>>a>>b;
+        addEdge(adj,a,b);
+    }
+
+    vector<int> result = topoSort(adj, n);
+
+    for(int x: result) cout << x << " ";
+    cout << endl;
+
+    return 0;
+}
+
+void addEdge(vector<int> adj[], int a, int b)
+{
+    adj[a].push_back(b);
+    // adj[b].push_back(a);
+}
+
+vector<int> topoSort(vector<int> adj[], int n){
+    queue <int> q;
+    vector<int> inDegree(n, 0);
+    vector<int> topoSort;
+
+    for(int i=0; i<n; i++){
+        for(int x: adj[i]){
+            inDegree[x]++;
+        }
+    }
+
+    for(int i=0; i<n; i++){
+        if(!inDegree[i]){
+            q.push(i);
+        }
+    }
+
+    while(!q.empty()){
+        int temp = q.front();
+        q.pop();
+        topoSort.push_back(temp);
+
+        for(auto x: adj[temp]){
+            inDegree[x]--;
+            if(!inDegree[x]){
+                q.push(x);
+            }
+        }
+    }
+    return topoSort;
+}

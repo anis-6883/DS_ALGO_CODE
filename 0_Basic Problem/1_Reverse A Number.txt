@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+  int n, reverse_num = 0;
+  cin>>n;
+
+  while(n>0){
+    int lastDigit = n%10;
+    reverse_num = (reverse_num*10) + lastDigit;
+    n = n/10;
+  }
+  cout<<reverse_num<<endl;
+  return 0;
+}
+
+

@@ -1,0 +1,19 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+int main()
+{
+  int n, sum = 0;
+  cin>>n;
+  int i = n;
+  
+  while(i>0){
+    int lastDigit = i%10;
+    sum += pow(lastDigit, 3);
+    i = i/10;
+  }
+  sum == n ? cout<<"Amstrong Number"<<endl : cout<<"Not Amstrong Number"<<endl;
+  return 0;
+}
+
+

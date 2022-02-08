@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int t,i,j,temp;
+    cin >> t;
+
+    while(t--)
+    {
+        int n;
+        cin >> n;
+        int arr[n];
+
+        for(j=0; j<n; j++)
+            cin>>arr[j];
+
+        int low=0, mid=0, high=n-1;
+
+        while(mid <= high)
+        {
+            switch(arr[mid])
+            {
+            case 0:
+                swap(arr[mid], arr[low]);
+                low++;
+                mid++;
+                break;
+            case 1:
+                mid++;
+                break;
+            case 2:
+                swap(arr[mid], arr[high]);
+                high--;
+                break;
+            }
+        }
+        for(j=0; j<n; j++)
+            cout<<arr[j]<<" ";
+        cout<<endl;
+    }
+    return 0;
+}

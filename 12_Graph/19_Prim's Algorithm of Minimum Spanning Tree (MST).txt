@@ -1,0 +1,74 @@
+#include <iostream>
+#include <vector>
+#include <utility>
+#include <limits.h>
+using namespace std;
+
+void addEdge(vector<pair<int, int>> [], int, int, int);
+
+int main()
+{
+    int n;
+    cout<<"How Many Nodes: ";
+    cin>>n;
+
+    vector<pair<int,int>> adj[n];
+
+    int edge;
+    cout<<"How many Edges: ";
+    cin>>edge;
+    for(int i=0; i<edge; i++)
+    {
+        cout<<"Input the nodes and weight: ";
+        int a, b, wt;
+        cin >> a >> b >> wt;
+        addEdge(adj, a, b, wt);
+    }
+
+    vector<int> parent(n, -1);
+    vector<int> key(n, INT_MAX);
+    vector<bool> mstSet(n, false);
+
+    key[0] = 0;
+    parent[0] = -1;
+
+    for(int count=0; count < n-1; count++){
+
+        int minWeight = INT_MAX, u;
+
+        for(int v=0; v<n; v++){
+            if(mstSet[v] == false && key[v] < minWeight){
+                minWeight = key[v];
+                u = v;
+            }
+        }
+
+        mstSet[u] = true;
+
+        for(auto x: adj[u]){
+
+            int v = x.first;
+            int wt = x.second;
+
+            if(mstSet[v] == false && wt < key[v]){
+                parent[v] = u;
+                key[v] = wt;
+            }
+
+        }
+    }
+
+    cout << "Minimum Spanning Tree (MST) of Prim's Algorithm" << endl;
+    for(int i=1; i<n; i++){
+        cout << parent[i] << "---" << i << endl;
+    }
+
+    return 0;
+}
+
+void addEdge(vector<pair<int, int>> adj[], int a, int b, int wt)
+{
+    adj[a].push_back({b, wt});
+    adj[b].push_back({a, wt});
+}
+

@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+
+struct Node
+{
+    Node* left;
+    int data;
+    Node* right;
+
+    Node(int value){
+        data = value;
+        left = NULL;
+        right = NULL;
+    }
+};
+int minValue(Node*);
+int maxValue(Node*);
+
+int main()
+{
+    Node* root = new Node(4);
+    root->left = new Node(2);
+    root->right = new Node(5);
+    root->left->left = new Node(1);
+    root->left->right = new Node(3);
+    root->right->right = new Node(6);
+
+    cout << minValue(root) << endl;
+    cout << maxValue(root) << endl;
+
+    return 0;
+}
+
+int minValue(Node* root){
+    if(root == NULL) return -1;
+
+    Node* temp = root;
+
+    while(temp->left != NULL){
+        temp = temp->left;
+    }
+
+    return temp->data;
+}
+
+int maxValue(Node* root){
+    if(root == NULL) return -1;
+
+    Node* temp = root;
+
+    while(temp->right != NULL){
+        temp = temp->right;
+    }
+
+    return temp->data;
+}

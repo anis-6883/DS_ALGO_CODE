@@ -1,0 +1,25 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    int letter[26]= {0};
+    string str;
+    getline(cin, str);
+
+    transform(str.begin(), str.end(), str.begin(), ::tolower);
+
+    for(int i=0; i<str.size(); i++)
+        letter[str[i] - 97]++;
+
+    for (int i = 0; i < 26; i++)
+        if (letter[i] >= 1)
+        {
+            int freq = letter[i];
+            char result = (char) (i + 97);
+            cout << "Count[" << result << "] = " << freq << endl;
+        }
+
+    return 0;
+}

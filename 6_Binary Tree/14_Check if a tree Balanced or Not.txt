@@ -1,0 +1,72 @@
+#include <iostream>
+using namespace std;
+
+struct Node
+{
+    Node* left;
+    int data;
+    Node* right;
+
+    Node(int value){
+        data = value;
+        left = NULL;
+        right = NULL;
+    }
+};
+int heightOfTree(Node*);
+bool balanceTreeOrNot(Node*);
+
+int main()
+{
+    // tree 1
+    // Node* root = new Node(1);
+    // root->left = new Node(2);
+    // root->right = new Node(3);
+    // root->left->left = new Node(4);
+    // root->left->right = new Node(5);
+    // root->left->right->left = new Node(6);
+    // root->right->left = new Node(7);
+    // root->right->right = new Node(8);
+    // root->right->right->left = new Node(9);
+    // root->right->right->right = new Node(10);
+
+    // tree 2
+    Node* root = new Node(1);
+    root->left = new Node(2);
+    root->left->left = new Node(3);
+    root->left->left->left = new Node(9);
+    root->right = new Node(4);
+    root->right->left = new Node(5);
+    root->right->right = new Node(6);
+    root->right->right->right = new Node(7);
+    root->right->right->right->right = new Node(8);
+
+    balanceTreeOrNot(root) ? 
+        cout << "Tree is Balanced" << endl : 
+        cout << "Tree is not Balanced" << endl;
+
+    return 0;
+}
+
+int heightOfTree(Node* root){
+    if(root == NULL) return 0;
+    int leftHeight = heightOfTree(root->left);
+    int rightHeight = heightOfTree(root->right);
+    return 1 + max(leftHeight, rightHeight);
+}
+
+bool balanceTreeOrNot(Node* root){
+
+    if(root == NULL) return true;
+
+    if(balanceTreeOrNot(root->left) == false) return false;
+    if(balanceTreeOrNot(root->right) == false) return false;
+
+    int leftHeight = heightOfTree(root->left);
+    int rightHeight = heightOfTree(root->right);
+
+    if(abs(leftHeight - rightHeight) <= 1) // law of balance
+        return true;
+    else
+        return false;
+}

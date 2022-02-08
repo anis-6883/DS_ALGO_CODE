@@ -1,0 +1,20 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    string str;
+    getline(cin, str);
+    int f = 0, l = str.size()-1;
+
+    while (f < l)
+    {
+        char temp = str[f];
+        str[f] = str[l];
+        str[l] = temp;
+        f++;
+        l--;
+    }
+
+    cout << str << endl;
+    return 0;
+}

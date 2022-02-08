@@ -1,0 +1,12 @@
+Array Operations:
+
+1) Create and Traverse the Array
+2) Insert Value in First, Last and Middle position in Array
+3) Searching Value in Array (Linear Search, Binary Search)
+4) Delete Value in First, Last and Middle position in Array
+5) Merging two Arrays
+6) Sorting the Array (Selection, Bubble, Insertion, Merge and Quick Algorithm)
+7) Create and Traverse the 2D Array/Matrix
+8) Transpose the 2D Array/Matrix
+9) Input two m * n matrices and then calculate the Sum of their corresponding elements and Store it in a third m * n matrix.
+10) Multiply two 2D Arrays/Matrices
