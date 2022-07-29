@@ -1,42 +1,40 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void marge_array(int arr1[],int arr2[], int n, int m)
-{
-    for(int i=0; i<n; i++)
-    {
-        bool flag=0;
-        if(arr1[i]>arr2[0])
-        {
-            swap(arr1[i],arr2[0]);
-            flag=1;
-        }
-        if(flag)
-        {
-            sort(arr2,arr2+m);
-        }
-    }
-}
+int main() {
+	
+	vector<int> arr = {1, 5, 7, 12};
+	vector<int> arr2 = {2, 3, 10, 12, 15};
+	vector<int> merge;
+	
+	
+	int n = arr.size();
+	int m = arr2.size();
+	int i = 0, j = 0;
 
-int main()
-{
-    int n,m;
-    cin>>n>>m;
-    int arr1[n];
-    int arr2[m];
-    for(int i=0; i<n; i++)
-        cin>>arr1[i];
+	while(i < n && j < m)
+	{
+		if(arr[i] < arr2[j])
+			merge.push_back(arr[i++]);
+		else if(arr[i] > arr2[j])
+			merge.push_back(arr2[j++]);
+		else
+		{
+			merge.push_back(arr2[j++]);
+			i++;
+		}
+	}
 
-    for(int i=0; i<m; i++)
-        cin>>arr2[i];
+	while(i < n)
+		merge.push_back(arr[i++]);
 
-    marge_array(arr1,arr2,n,m);
+	while(j < m)
+		merge.push_back(arr2[j++]);
 
-    for(int i=0; i<n; i++)
-        cout<<arr1[i]<<" ";
 
-    for(int i=0; i<m; i++)
-        cout<<arr2[i]<<" ";
+	for(int x: merge)
+		cout << x << " ";
 
-    return 0;
+	cout << endl;
+	return 0;
 }

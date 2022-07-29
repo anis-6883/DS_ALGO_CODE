@@ -1,0 +1,79 @@
+#include <iostream>
+using namespace std;
+
+class Stack
+{
+	public:
+		int *arr;
+		int size;
+		int top;
+
+	Stack(int size)
+	{
+		this -> size = size;
+		arr = new int[size]; // Dynamic (Heap) Memory
+		top = -1;
+	}
+
+	void push(int element)
+	{
+		if(size - top > 1)
+		{
+			top++;
+			arr[top] = element;
+		}
+		else
+			cout << "Stack Overflow!" << endl;
+	}
+
+	void pop()
+	{
+		if(top >= 0)
+			top--;
+		else
+			cout << "Stack Underflow!" << endl;
+	}
+
+	int peek()
+	{
+		if(top >= 0)
+			return arr[top];
+		else
+		{
+			cout << "Stack is Empty!" << endl;
+			return -1;
+		}
+	}
+
+	bool isEmpty()
+	{
+		if(top == -1)
+			return true;
+		else
+			return false;
+	}
+};
+
+int main()
+{
+	Stack stk(5);
+	
+	stk.push(100);
+	stk.push(200);
+	stk.push(300);
+	stk.push(400);
+	stk.push(500);
+	stk.push(600);
+
+	cout << stk.peek() << endl; // 500
+	stk.pop();
+	cout << stk.peek() << endl; // 400
+	stk.pop();
+
+	if(stk.isEmpty())
+		cout << "Stack is Empty!" << endl;
+	else
+		cout << "Stack is not Empty!" << endl;
+	
+    return 0;
+}

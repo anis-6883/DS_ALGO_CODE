@@ -1,4 +1,8 @@
 // Insertion Sort
+// 1. Assume that the first element is sorted
+// 2. Compare with the second element 
+// 3. Then replace it if first element is greater than second
+// 4. Find the right position of the second element and replace it by decreasing.
 
 #include <iostream>
 using namespace std;

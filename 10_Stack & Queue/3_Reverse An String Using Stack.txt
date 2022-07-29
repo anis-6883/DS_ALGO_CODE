@@ -1,0 +1,24 @@
+#include <iostream>
+#include <string>
+#include <stack>
+using namespace std;
+
+int main()
+{
+	stack<char> stk;
+	string str = "FAHIMA NIZAM";
+	int n = str.length();
+
+	for(int i=0; i<n; i++)
+		stk.push(str[i]);
+
+	int j = 0;
+	while(!stk.empty())
+	{
+		str[j] = stk.top();
+		j++;
+		stk.pop();
+	}
+	cout << str << endl;
+    return 0;
+}

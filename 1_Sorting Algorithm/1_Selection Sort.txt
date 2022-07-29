@@ -1,5 +1,5 @@
 // Selection Sort
-// 1. Select the minimum element
+// 1. Select the minimum element by comparing
 // 2. Then swap it at beginning element
 
 

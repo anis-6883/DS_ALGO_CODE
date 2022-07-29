@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Time Complexity: O(log(min(a, b)) -- GCD
+
+int getGCD(int a, int b)
+{
+	while(b != 0)
+	{
+		int rem = a % b;
+		a = b;
+		b = rem;
+	}
+	return a;
+}
+
+int main() {
+
+	int a = 24, b = 72;
+	cout << "Greatest Common Divisor (GCD) = " << getGCD(a, b) << endl;
+	cout << "Least Common Multiple (LCM) = " << (a*b)/getGCD(a,b) << endl;
+	
+	return 0;
+}
+

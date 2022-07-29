@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+
+	int arr[] = {1,2,3,4,5}, n = 5, key = 4, flag = 0;
+	int start = 0, end = n-1, mid = start + (end-start)/2;
+	
+	while(start <= end){
+		if(arr[mid] == key){
+			flag = 1;
+			break;
+		}
+
+		if(arr[mid] < key)
+			start = mid + 1;
+		else
+			end = mid - 1;
+
+		mid = start + (end-start)/2;
+	}
+
+	flag ? 
+		cout << "Found" << endl:
+		cout << "Not Found" << endl;
+	return 0;
+}

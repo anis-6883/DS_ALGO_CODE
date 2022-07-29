@@ -1,0 +1,40 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int main()
+{
+
+    // important stack container function list:
+    // 1.  size() => return size of stack
+    // 2.  push(index) => push value into stack
+    // 3.  pop() => erase/pop the top element into stack
+    // 4.  top() => return top index value from stack
+    // 5.  empty() => return true or false if stack is empty or not
+
+
+    stack<int> stk;
+    stk.push(10);
+    stk.push(20);
+    stk.push(30);
+    stk.push(40);
+
+    cout<<"Top: "<<stk.top()<<endl; // 40
+
+    stk.pop();
+
+    cout<<"Top: "<<stk.top()<<endl; // 30
+
+    cout<<"Size: "<<stk.size()<<endl; // 3
+
+    stk.empty()? cout << "Empty" << endl: cout << "Not Empty" << endl;
+
+	while(!stk.empty())
+	{
+		cout << stk.top() << " "; // 30 20 10
+		stk.pop();
+	}
+	cout << endl;
+
+    return 0;
+}
