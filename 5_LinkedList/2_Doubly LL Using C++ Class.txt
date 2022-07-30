@@ -6,11 +6,13 @@ class Node
 	public:
 		int data;
 		Node* next;
+		Node* prev;
 
 	Node(int data)
 	{
 		this -> data = data;
 		this -> next = NULL;
+		this -> prev = NULL;
 	}
 };
 
@@ -39,6 +41,7 @@ void insertAtHead(Node* &head, Node* &tail, int data)
 	{
 		Node* new_node = new Node(data);
 		new_node -> next = head;
+		head -> prev = new_node;
 		head = new_node;
 	}
 }
@@ -55,6 +58,7 @@ void insertAtTail(Node* &tail, Node* &head, int data)
 	{
 		Node* new_node = new Node(data);
 		tail -> next = new_node;
+		new_node -> prev = tail;
 		tail = new_node;
 	}
 }
@@ -93,13 +97,17 @@ void insertAtPos(Node* &head, Node* &tail, int pos, int data)
 
 	Node* new_node = new Node(data);
 	new_node -> next = temp -> next;
+	temp -> next -> prev = new_node;
 	temp -> next = new_node;
+	new_node -> prev = temp;
 }
 
 void deleteAtHead(Node* &head)
 {
 	Node* temp = head;
 	head = head -> next;
+	head -> prev = NULL;
+	temp -> next = NULL;
 	delete temp; // memory free
 }
 
@@ -114,6 +122,7 @@ void deleteAtTail(Node* &head, Node* &tail)
 		temp = temp -> next;
 	}
 
+	prev -> next -> prev = NULL;
 	prev -> next = NULL;
 	tail = prev;
 	delete temp;
@@ -148,9 +157,18 @@ void deleteAtPos(Node* &head, Node* &tail, int pos)
 
 	// delete at tail
 	if(curr -> next == NULL)
+	{
 		tail = prev;
-	
-	prev -> next = curr -> next; 
+		curr -> prev = NULL;
+	}
+	else
+	{
+		prev -> next = curr -> next; 
+		curr -> prev = NULL;
+		curr -> next -> prev = prev;
+		curr -> next = NULL;
+	}
+
 	delete curr;
 }
 
@@ -190,8 +208,8 @@ int main()
 	insertAtPos(head, tail, 3, -5);
 	insertAtPos(head, tail, 1, -20);
 	insertAtPos(head, tail, 8, 20);
-	insertAtPos(head, tail, -1, 20);
-	insertAtPos(head, tail, 10, 25);
+	insertAtPos(head, tail, -1, 20); // Invalid
+	insertAtPos(head, tail, 10, 25); // Invalid
 
 	// Display Linked List...
 	display(head); // -20 -15 -10 -5 5 10 15 20
@@ -210,12 +228,12 @@ int main()
 
 	deleteAtPos(head, tail, 3);
 	deleteAtPos(head, tail, 3);
-	deleteAtPos(head, tail, -1);
-	deleteAtPos(head, tail, 5);
-	deleteAtPos(head, tail, 4);
 
 	// Display Linked List...
 	display(head); // -15 -10 10 15
+
+	deleteAtPos(head, tail, 5); // Invalid
+	deleteAtPos(head, tail, 4);
 
 	cout << "Head -> " << head->data << endl; // -15
 	cout << "Tail -> " << tail->data << endl; // 10
